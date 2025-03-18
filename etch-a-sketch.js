@@ -1,18 +1,31 @@
 const grid = document.querySelector(".grid")
+const button = document.querySelector("button")
 
-const rows = 16
-const cols = 16
+window.onload = () => {
+  initialDimension = 16
+  setGrid(initialDimension)
 
-const onMouseHover = (e) => {
-  e.target.style.backgroundColor = "blue"
+  button.addEventListener("click", () => {
+    let gridDimension = parseInt(prompt("Enter grid size: "))
+    grid.replaceChildren() // Clear the grid
+    setGrid(gridDimension)
+  })
 }
 
-// Create a grid of square divs
-for (let i = 0; i < rows; i++) {
-  for (let j = 0; j < cols; j++) {
+function setGrid(n) {
+  let sizePercentage = `${100 / n}%`
+
+  // Create a grid of square divs
+  for (let i = 0; i < n * n; i++) {
     const square = document.createElement("div")
     square.classList.add("square")
+    square.style.width = sizePercentage
+    square.style.height = sizePercentage
     square.addEventListener("mouseover", onMouseHover)
     grid.appendChild(square)
   }
+}
+
+function onMouseHover(e) {
+  e.target.style.backgroundColor = "blue"
 }
