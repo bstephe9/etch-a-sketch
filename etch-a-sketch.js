@@ -7,9 +7,21 @@ window.onload = () => {
 
   button.addEventListener("click", () => {
     let gridDimension = parseInt(prompt("Enter grid size: "))
-    grid.replaceChildren() // Clear the grid
-    setGrid(gridDimension)
+    if (dimensionIsValid(gridDimension)) {
+      grid.replaceChildren() // Clear the grid
+      setGrid(gridDimension)
+    } else {
+      alert("Grid size must be an integer between 1-100")
+    }
   })
+}
+
+function dimensionIsValid(dimension) {
+  if (isNaN(dimension)) return false
+  if (!Number.isInteger(dimension)) return false
+  if ((dimension < 1 || dimension > 100)) return false
+
+  return true;
 }
 
 function setGrid(n) {
